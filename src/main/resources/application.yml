@@ -1,0 +1,66 @@
+server:
+  port: 8080
+  address:
+    ip: localhost
+  debug: true
+
+logging:
+  level:
+    root: INFO
+    eclub.com.conticonnec.client: INFO
+
+configuracion:
+  ambiente: Ambiente de Desarrollo
+
+spring:
+  application:
+    name: conti-connec-service
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/eclub_abm_conti
+    username: postgres
+    password: sql$
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      #ddl-auto: create-drop
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  feing:
+    httpclient:
+      disableSslValidation: true
+      enabled: false
+    okhttp:
+      enabled: true
+    client:
+      config:
+        default:
+          connectionTimeout: 10000
+          readTimeout: 10000
+          loggerLevel: BASIC
+
+# Banco Continental
+api:
+  conti:
+    comm-protocol: https
+    connTimeout: 10000
+    readTimeout: 10000
+    #for linux
+    #SSLFilePath: file://home:/waled/WALED1.pfx
+    #for windows
+    SSLFilePath: file:///C:/CERTIFICADO_CONTI/WALED1.pfx
+    SSLPwd: x4TjmHVyA3hHoBTm
+    subscription_key: 225f19b75b0c4e658577b33c0802eead
+    client_id: waled
+    client_secret: 28940183-7214-44e1-91e4-a5cdd3015141
+    url:
+      base: https://api-sandbox.bancontinental.com.py
+      post_token: https://api-sandbox.bancontinental.com.py/autenticarServicio/v1/realms/externo
+      get_by_nro_solicitud: /api-clientes-waled/v1/solicitud
+      post_solicitud: /api-clientes-waled/v1/solicitud
+      get_by_state: /api-clientes-waled/v1/solicitud/allByEstado
+      post_registrar_seguimiento: /tarjetas-seguimientos/v1/registrar
