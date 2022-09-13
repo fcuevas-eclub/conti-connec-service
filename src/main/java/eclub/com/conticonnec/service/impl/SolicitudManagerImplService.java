@@ -84,7 +84,8 @@ public class SolicitudManagerImplService implements SolicitudManagerService {
     public ResponseEntity registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception {
         String mask = applyMask(dto.getNumeroTarjeta());
         dto.setNumeroTarjeta(mask);
-        //ResponseEntity response = contiCallHelper.registrarSeguimiento(dto);
+
+        //ResponseEntity response = contiCallHelper.registrarSeguimiento(dto); /* CUANDO YA FUNCIONA SE TIENE QUE DESCOMENTAR*** */
         ResponseEntity response;
 
         Collection<SeguimientoAdjunto> adjuntos = new ArrayList<>();

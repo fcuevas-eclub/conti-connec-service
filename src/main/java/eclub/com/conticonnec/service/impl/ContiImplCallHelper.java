@@ -152,8 +152,8 @@ public class ContiImplCallHelper implements ContiCallHelper {
     }
 
     @Override
-    public ResponseEntity<?> registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception {
-
+    //public ResponseEntity<?> registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception {
+    public ResponseEntity registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception {
         String token = this.getToken();
 
         Map<String, String> headerParams = new HashMap<>();
@@ -168,7 +168,8 @@ public class ContiImplCallHelper implements ContiCallHelper {
 
         //ResponseEntity<?> response;
         try {
-            ResponseEntity<?> response;
+            //ResponseEntity<?> response;
+            ResponseEntity response;
             response = vendorCallHelper.callPostObject(contiRestTemplate,
                                                     urlContiBase + urlRegistrarSeguimiento,
                                                         String.class,

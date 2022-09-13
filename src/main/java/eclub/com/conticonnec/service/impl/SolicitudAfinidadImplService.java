@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class SolicitudAfinidadImplService extends ServiceBaseGeneric<SolicitudAfinidad> implements SolicitudAfinidadService {
+public class SolicitudAfinidadImplService extends ServiceBaseGeneric<SolicitudAfinidad, SolicitudAfinidadDto> implements SolicitudAfinidadService {
 
     private final SolicitudAfinidadRepository repository;
     private static Logger logger = LoggerFactory.getLogger(SolicitudAfinidadImplService.class);
@@ -41,9 +41,9 @@ public class SolicitudAfinidadImplService extends ServiceBaseGeneric<SolicitudAf
     }
 
     @Override
-    public SolicitudAfinidad convertToEntity(Object dto) {
-        logger.info("convertToEntity->DTO::SolicitudAfinidadDto {}:", (SolicitudAfinidadDto)dto);
-        SolicitudAfinidad entity = modelMapper.map((SolicitudAfinidadDto)dto, SolicitudAfinidad.class);
+    public SolicitudAfinidad convertToEntity(SolicitudAfinidadDto dto) {
+        logger.info("convertToEntity->DTO::SolicitudAfinidadDto {}:", dto);
+        SolicitudAfinidad entity = modelMapper.map(dto, SolicitudAfinidad.class);
         logger.info("convertToEntity->Entity::SolicitudAfinidad {}:", entity);
         return entity;
     }

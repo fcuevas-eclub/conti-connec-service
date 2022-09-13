@@ -20,7 +20,7 @@ import java.util.Optional;
  * acceder a la base de datos.
  */
 @Service
-public class EstadosTarjetaImplService extends ServiceBaseGeneric<EstadosTarjeta> implements EstadosTarjetaService {
+public class EstadosTarjetaImplService extends ServiceBaseGeneric<EstadosTarjeta, EstadosTarjetaDto> implements EstadosTarjetaService {
 
     // Un constructor que se utiliza para inyectar el repositorio en el servicio.
     private final EstadosTarjetaRepository repository;
@@ -81,9 +81,9 @@ public class EstadosTarjetaImplService extends ServiceBaseGeneric<EstadosTarjeta
      * @return A EstadosTarjeta entity
      */
     @Override
-    public EstadosTarjeta convertToEntity(Object dto) {
-        logger.info("convertToEntity->DTO::EstadosTarjetaDto {}:", (EstadosTarjetaDto)dto);
-        EstadosTarjeta entity = modelMapper.map((EstadosTarjetaDto)dto, EstadosTarjeta.class);
+    public EstadosTarjeta convertToEntity(EstadosTarjetaDto dto) {
+        logger.info("convertToEntity->DTO::EstadosTarjetaDto {}:", dto);
+        EstadosTarjeta entity = modelMapper.map(dto, EstadosTarjeta.class);
         logger.info("convertToEntity->Entity::EstadosTarjeta {}:", entity);
         return entity;
     }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -74,7 +73,7 @@ public class SeguimientoController {
      * @param nroDocumento El número del documento a buscar.
      * @return Seguimiento
      */
-    @GetMapping("/findByNroDocumento/{nroDocumento}/{nroSolicitud}")
+    @GetMapping("/findByNroDocumentoAndNroSolicitud/{nroDocumento}/{nroSolicitud}")
     public ResponseEntity findByNroDocumentoAndNroSolicitud(@PathVariable("nroDocumento") String nroDocumento, @PathVariable("nroSolicitud") String nroSolicitud) {
         try {
             ResponseEntity response;

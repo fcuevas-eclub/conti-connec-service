@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class SeguimientoAdjuntoImplService extends ServiceBaseGeneric<SeguimientoAdjunto> implements SeguimientoAdjuntoService {
+public class SeguimientoAdjuntoImplService extends ServiceBaseGeneric<SeguimientoAdjunto, SeguimientoAdjuntoDTO> implements SeguimientoAdjuntoService {
 
     private final SeguimientoRepository repository;
     private final SeguimientoAdjuntoRepository adjuntoRepository;
@@ -76,9 +76,9 @@ public class SeguimientoAdjuntoImplService extends ServiceBaseGeneric<Seguimient
      * @return A Seguimiento entity
      */
     @Override
-    public SeguimientoAdjunto convertToEntity(Object dto) {
-        logger.info("convertToEntity->DTO::SeguimientoAdjuntoDto {}:", (SeguimientoAdjuntoDTO)dto);
-        SeguimientoAdjunto entity = modelMapper.map((SeguimientoAdjuntoDTO)dto, SeguimientoAdjunto.class);
+    public SeguimientoAdjunto convertToEntity(SeguimientoAdjuntoDTO dto) {
+        logger.info("convertToEntity->DTO::SeguimientoAdjuntoDto {}:", dto);
+        SeguimientoAdjunto entity = modelMapper.map(dto, SeguimientoAdjunto.class);
         logger.info("convertToEntity->Entity::SeguimientoAdjunto {}:", entity);
         return entity;
     }

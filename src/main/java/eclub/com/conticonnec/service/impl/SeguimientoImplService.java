@@ -16,7 +16,7 @@ import java.util.Optional;
 
 
 @Service
-public class SeguimientoImplService extends ServiceBaseGeneric<Seguimiento> implements SeguimientoService {
+public class SeguimientoImplService extends ServiceBaseGeneric<Seguimiento, SeguimientoDto> implements SeguimientoService {
 
     private final SeguimientoRepository repository;
     public SeguimientoImplService(SeguimientoRepository repository) {
@@ -77,9 +77,9 @@ public class SeguimientoImplService extends ServiceBaseGeneric<Seguimiento> impl
      * @return A Seguimiento entity
      */
     @Override
-    public Seguimiento convertToEntity(Object dto) {
-        logger.info("convertToEntity->DTO::SeguimientoDto {}:", (SeguimientoDto)dto);
-        Seguimiento entity = modelMapper.map((SeguimientoDto)dto, Seguimiento.class);
+    public Seguimiento convertToEntity(SeguimientoDto dto) {
+        logger.info("convertToEntity->DTO::SeguimientoDto {}:", dto);
+        Seguimiento entity = modelMapper.map(dto, Seguimiento.class);
         logger.info("convertToEntity->Entity::Seguimiento {}:", entity);
         return entity;
     }
