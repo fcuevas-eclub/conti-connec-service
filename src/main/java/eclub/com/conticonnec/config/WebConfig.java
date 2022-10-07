@@ -63,36 +63,4 @@ public class WebConfig implements WebMvcConfigurer {
 
     }
 
-
-
-/*
-
-
-    @Bean(name = "tarjetasRestTemplate")
-    RestTemplate tarjetasRestTemplate() throws KeyManagementException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException, URISyntaxException {
-
-        KeyStore clientStore = KeyStore.getInstance("PKCS12");
-        clientStore.load(new FileInputStream(contibankSSLFilePath.getFile()), contibankSSLPwd.toCharArray());
-
-        SSLContextBuilder sslContextBuilder = new SSLContextBuilder();
-        sslContextBuilder.useProtocol("TLS");
-        sslContextBuilder.loadKeyMaterial(clientStore, contibankSSLPwd.toCharArray());
-        sslContextBuilder.loadTrustMaterial(new TrustSelfSignedStrategy());
-
-        SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(sslContextBuilder.build());
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLSocketFactory(sslConnectionSocketFactory)
-                .build();
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
-        requestFactory.setConnectTimeout(contibankConnTimeout); // x seconds
-        requestFactory.setReadTimeout(contibankReadTimeout); // x seconds
-
-        return new RestTemplate(requestFactory);
-
-    }
-
-*/
-
-
-
 }

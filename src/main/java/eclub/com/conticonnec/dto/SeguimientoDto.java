@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -38,6 +39,7 @@ public class SeguimientoDto extends BaseDto {
 
     private String tipoDocumento;
 
-    private Collection<SeguimientoAdjuntoDTO> adjuntos = new ArrayList<>();
-
+    //private Collection<SeguimientoAdjuntoDTO> adjuntos = new ArrayList<>();
+    //private Collection<SeguimientoAdjuntoDTO> adjunto = new ArrayList<>();
+    private List<SeguimientoAdjuntoDTO> adjunto = new ArrayList<>();
 }

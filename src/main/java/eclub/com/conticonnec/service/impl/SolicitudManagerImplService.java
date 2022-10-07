@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Transactional
 @Service
@@ -82,22 +82,28 @@ public class SolicitudManagerImplService implements SolicitudManagerService {
 
     @Override
     public ResponseEntity registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception {
-        String mask = applyMask(dto.getNumeroTarjeta());
+        String mask = applyMask(dto.getNumeroTarjeta());//aplica formato valido al numero de tarjeta.
+        logger.info("SolicitudManagerImplService.registrarSeguimiento.mask: {}", mask);
         dto.setNumeroTarjeta(mask);
 
-        //ResponseEntity response = contiCallHelper.registrarSeguimiento(dto); /* CUANDO YA FUNCIONA SE TIENE QUE DESCOMENTAR*** */
-        ResponseEntity response;
+        ResponseEntity response = contiCallHelper.registrarSeguimiento(dto);
+        //ResponseEntity response;
 
-        Collection<SeguimientoAdjunto> adjuntos = new ArrayList<>();
+        if (response.getBody() == null) {
+            throw new Exception("Error al procesar la peticion realizada.");
+        }
+
+        List<SeguimientoAdjunto> adjuntos = new ArrayList<>();
 
         Seguimiento seguimiento = Seguimiento.builder()
                                             .fechaAlta(new Date())
                                             .usuarioAlta(dto.getUsuarioId())
                                             .nroDocumento(dto.getNumeroDocumento())
                                             .nroTarjeta(dto.getNumeroTarjeta())
-                                            .nroSolicitud("123")
+                                            .nroSolicitud("123") //PREGUNTAR QUE VALOR SE DEBE SETEAR...
                                         .build();
 
+        //Setear datos para el seguimiento_adjunto.
         for (SeguimientoAdjuntoDTO s_a:dto.getAdjunto()) {
             SeguimientoAdjunto a = new SeguimientoAdjunto();
             a.setStatus(Status.ACTIVE);
@@ -107,7 +113,7 @@ public class SolicitudManagerImplService implements SolicitudManagerService {
             adjuntos.add(a);
         }
 
-        seguimiento.setAdjuntos(adjuntos);
+        seguimiento.setAdjunto(adjuntos);
 
         Seguimiento result = seguimientoService.create(seguimiento);
 
@@ -116,14 +122,14 @@ public class SolicitudManagerImplService implements SolicitudManagerService {
 
     private String applyMask(String cardNumberOriginal) throws Exception {
         //validar que sea un nro de tarjeta valido
-        if(cardNumberOriginal.length() == 16) {
+        if (cardNumberOriginal.length() == 16) {
             String cardNumberMask;
             System.out.println(cardNumberOriginal);
             String maskedCard = cardNumberOriginal.substring(0, 4) + "-XXXX-XXXX-" + cardNumberOriginal.substring(12, 16);
             System.out.println(maskedCard);
             return maskedCard;
-        }else {
-            throw new Exception("El nro de tarjeta no es valido, largo no es 16 caracteres "+cardNumberOriginal);
+        } else {
+            throw new Exception("El nro de tarjeta no es valido, largo no es 16 caracteres "+ cardNumberOriginal);
         }
     }
 

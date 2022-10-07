@@ -4,12 +4,12 @@ import com.eclub.lib.common.models.dto.BaseDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.commons.lang3.builder.ToStringExclude;
 
 @Getter
 @Setter
-@ToString
+//@ToString
 public class SeguimientoAdjuntoDTO extends BaseDto {
+
     /*
     Tipo de documento(1,2).
     1 = digitaliza el Documento de Identidad.
@@ -17,8 +17,10 @@ public class SeguimientoAdjuntoDTO extends BaseDto {
     */
     private Integer tipoDocumento;
 
-    @ToStringExclude
-    private byte[] archivo;//Archivo a digitalizar
+    //@ToStringExclude
+    //private byte[] Archivo;//Archivo a digitalizar
+    //private String Archivo;//Archivo a digitalizar
+    private String archivo;//Archivo a digitalizar
 
     private SeguimientoDto seguimiento;
 }

@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -46,6 +47,8 @@ public class Seguimiento extends BaseEntity {
 
     @OneToMany(mappedBy = "seguimiento", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Collection<SeguimientoAdjunto> adjuntos = new ArrayList<>();
+    //private Collection<SeguimientoAdjunto> adjuntos = new ArrayList<>();
+    //private Collection<SeguimientoAdjunto> adjunto = new ArrayList<>();
+    private List<SeguimientoAdjunto> adjunto = new ArrayList<>();
 
 }

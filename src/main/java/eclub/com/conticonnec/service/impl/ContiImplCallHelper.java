@@ -161,14 +161,7 @@ public class ContiImplCallHelper implements ContiCallHelper {
         headerParams.put("Subscription-Key", ContiSubcriptionKey);
         headerParams.put("Authorization", "Bearer " + token);
 
-        logger.info("ContiCallHelper.registrarSeguimiento");
-        //logger.info("ContiCallHelper.registrarSeguimiento.dto: {}", dto);
-        //logger.info("ContiCallHelper.registrarSeguimiento.token: {}", token);
-        logger.info("ContiCallHelper.registrarSeguimiento.url: {}", urlContiBase + urlRegistrarSeguimiento);
-
-        //ResponseEntity<?> response;
         try {
-            //ResponseEntity<?> response;
             ResponseEntity response;
             response = vendorCallHelper.callPostObject(contiRestTemplate,
                                                     urlContiBase + urlRegistrarSeguimiento,
@@ -180,4 +173,5 @@ public class ContiImplCallHelper implements ContiCallHelper {
             throw new Exception(e.getMessage());
         }
     }
+
 }

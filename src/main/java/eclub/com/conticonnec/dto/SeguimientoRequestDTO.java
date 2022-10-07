@@ -3,12 +3,10 @@ package eclub.com.conticonnec.dto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.commons.lang3.builder.ToStringExclude;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -33,7 +31,7 @@ public class SeguimientoRequestDTO {
     @NotNull
     private String tipoTarjeta;
 
-    @ToStringExclude
-    private Collection<SeguimientoAdjuntoDTO> adjunto = new ArrayList<SeguimientoAdjuntoDTO>();
+    //@ToStringExclude
+    private List<SeguimientoAdjuntoDTO> adjunto = new ArrayList<SeguimientoAdjuntoDTO>();
 
 }

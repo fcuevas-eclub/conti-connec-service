@@ -20,9 +20,11 @@ public class SeguimientoAdjunto extends BaseEntity {
     @Column(name = "tipo_documento", nullable = false)
     private Integer tipoDocumento;
 
-    @ToStringExclude
+    //@ToStringExclude
     @Column(name = "archivo", nullable = false)
-    private byte[] archivo;
+    //private byte[] Archivo;
+    //private String Archivo;
+    private String archivo;
 
     @ManyToOne
     @JoinColumn(name = "seguimiento_id", nullable = false)

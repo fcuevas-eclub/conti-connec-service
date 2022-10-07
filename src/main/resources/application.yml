@@ -54,7 +54,8 @@ api:
     #for windows
     SSLFilePath: file:///C:/CERTIFICADO_CONTI/WALED1.pfx
     SSLPwd: x4TjmHVyA3hHoBTm
-    subscription_key: 225f19b75b0c4e658577b33c0802eead
+    #subscription_key: 225f19b75b0c4e658577b33c0802eead
+    subscription_key: 32823d4b00a54b15946506ba5b60ffb4
     client_id: waled
     client_secret: 28940183-7214-44e1-91e4-a5cdd3015141
     url:
@@ -63,4 +64,5 @@ api:
       get_by_nro_solicitud: /api-clientes-waled/v1/solicitud
       post_solicitud: /api-clientes-waled/v1/solicitud
       get_by_state: /api-clientes-waled/v1/solicitud/allByEstado
-      post_registrar_seguimiento: /tarjetas-seguimientos/v1/registrar
+      #post_registrar_seguimiento: /tarjetas-seguimientos/v1/registrar
+      post_registrar_seguimiento: /api-tarjeta-seguimiento/v1/registrar

@@ -13,6 +13,6 @@ public interface ContiCallHelper {
 
     ResponseEntity GetSolicitudByEstado(int estado) throws Exception;
 
-    //ResponseEntity<?> registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception;
     ResponseEntity registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception;
+
 }

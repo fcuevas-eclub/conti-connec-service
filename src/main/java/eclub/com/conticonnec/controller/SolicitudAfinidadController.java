@@ -78,8 +78,9 @@ public class SolicitudAfinidadController {
 
                 SolicitudResumenContiDTO solresumeres = solicitudManagerService.GetSolicitudByNroSolicitud(parts[1]);
 
-                if (solresumeres == null)
+                if (solresumeres == null) {
                     throw new Exception("solresume whit nro: " + parts[1] + " Not found in conti API!");
+                }
 
                 SolicitudResumenContiDTO solresume = solresumeres;
                 SolicitudAfinidad sol = SolicitudAfinidad.builder()
@@ -155,7 +156,6 @@ public class SolicitudAfinidadController {
      */
     @PostMapping("/registrarSeguimiento")
     public ResponseEntity registrarSeguimiento(@RequestBody SeguimientoRequestDTO dto) {
-
         ResponseEntity response;
         try {
             response = solicitudManagerService.registrarSeguimiento(dto);
