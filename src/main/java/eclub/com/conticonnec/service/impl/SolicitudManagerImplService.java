@@ -62,6 +62,12 @@ public class SolicitudManagerImplService implements SolicitudManagerService {
         return retorno;
     }
 
+    /**
+     * Envía una solicitud a la clase ContiCallHelper.
+     *
+     * @param solicitudContiDTO Este es el objeto que contiene los datos que se enviarán a la API.
+     * @return Entidad de respuesta
+     */
     @Override
     public ResponseEntity sendSolicitud(SolicitudContiDTO solicitudContiDTO) throws Exception {
         ResponseEntity response = contiCallHelper.sendSolicitud(solicitudContiDTO);

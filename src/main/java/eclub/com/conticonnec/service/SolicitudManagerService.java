@@ -9,6 +9,12 @@ public interface SolicitudManagerService {
 
     String extraeNombres(String nombres, boolean extraePrimerNombre);
 
+    /**
+     * Envía una petición al servidor.
+     *
+     * @param dto El objeto que contiene los datos a enviar.
+     * @return ResponseEntity<SolicitudContiDTO>
+     */
     ResponseEntity sendSolicitud(SolicitudContiDTO dto) throws Exception;
 
     SolicitudResumenContiDTO GetSolicitudByNroSolicitud(String nrosolicitud) throws Exception;

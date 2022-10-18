@@ -88,6 +88,12 @@ public class ContiImplCallHelper implements ContiCallHelper {
         return textoToken;
     }
 
+    /**
+     * Envía una solicitud a la API de Conti para crear una nueva Solicitud.
+     *
+     * @param dto El objeto que contiene los datos que se enviarán a la API.
+     * @return Una cadena con el número de la solicitud.
+     */
     @Override
     public ResponseEntity sendSolicitud(SolicitudContiDTO dto) throws Exception {
         String token = this.getToken();

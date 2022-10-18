@@ -25,7 +25,7 @@ public class SeguimientoImplService extends ServiceBaseGeneric<Seguimiento, Segu
 
     // Creación de un objeto registrador para registrar mensajes.
     private static Logger logger = LoggerFactory.getLogger(SeguimientoImplService.class);
-    
+
     /**
      * > Esta función devuelve el repositorio que se utiliza para acceder a la base de datos
      *
