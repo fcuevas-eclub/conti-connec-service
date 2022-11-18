@@ -19,7 +19,7 @@ configuracion:
 spring:
   output:
     ansi:
-      enabled: ALWAYS
+      enabled: ${SPRING_OUTPUT_ANSI_ENABLED}
   application:
     name: ${SPRING_APPLICATION_NAME}
     #Datasource Properties
@@ -35,8 +35,8 @@ spring:
         ddl-auto: ${JPA_HIBERNATE_DDL_AUTO}
       properties:
         hibernate:
-          dialect: org.hibernate.dialect.PostgreSQLDialect
-          format_sql: true
+          dialect: ${JPA_HIBERNATE_PROPERTIES_HIBERNATE_DIALECT}
+          format_sql: ${JPA_HIBERNATE_PROPERTIES_HIBERNATE_FORMAT_SQL}
       show-sql: ${JPA_SHOW_SQL}
       database: ${JPA_DATABASE}
       database-platform: ${JPA_DATABASE_PLATFORM}
