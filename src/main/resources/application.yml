@@ -2,8 +2,8 @@
 server:
   port: ${SERVER_PORT}
   address:
-    ip: ${SERVER_ADDRES_IP}
-  debug: ${SERVER_ADDRES_IP}
+    ip: ${SERVER_ADDRESS_IP}
+  debug: ${SERVER_DEBUG}
 
 #Logging level
 logging:
