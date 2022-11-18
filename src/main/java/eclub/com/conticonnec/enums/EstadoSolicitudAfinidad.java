@@ -1,5 +1,5 @@
 package eclub.com.conticonnec.enums;
 
-public enum ETypeSolicitudAfinidadState {
+public enum EstadoSolicitudAfinidad {
     PENDING,APPROVED,REJECTED,ERROR;
 }

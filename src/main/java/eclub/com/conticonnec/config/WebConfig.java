@@ -17,7 +17,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import javax.net.ssl.SSLContext;
 import java.security.*;
 import java.security.cert.CertificateException;
 

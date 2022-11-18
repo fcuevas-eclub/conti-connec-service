@@ -2,10 +2,10 @@ package eclub.com.conticonnec.service.impl;
 
 
 import com.eclub.lib.common.services.ServiceBaseGeneric;
-import eclub.com.conticonnec.domain.EstadoTarjeta;
-import eclub.com.conticonnec.dto.EstadosTarjetaDto;
-import eclub.com.conticonnec.repo.EstadosTarjetaRepository;
-import eclub.com.conticonnec.service.EstadosTarjetaService;
+import eclub.com.conticonnec.domain.Envio;
+import eclub.com.conticonnec.dto.EnvioDto;
+import eclub.com.conticonnec.repo.EnvioRepository;
+import eclub.com.conticonnec.service.EnvioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,20 +16,20 @@ import java.util.Optional;
 
 /**
  * Esta clase es una clase de servicio que implementa la interfaz
- * EstadosTarjetaService. Utiliza el Repositorio de EstadosTarjeta para
+ * EnvioService. Utiliza el Repositorio de Envio para
  * acceder a la base de datos.
  */
 @Service
-public class EstadosTarjetaImplService extends ServiceBaseGeneric<EstadoTarjeta, EstadosTarjetaDto> implements EstadosTarjetaService {
+public class EnvioImplService extends ServiceBaseGeneric<Envio, EnvioDto> implements EnvioService {
 
     // Un constructor que se utiliza para inyectar el repositorio en el servicio.
-    private final EstadosTarjetaRepository repository;
-    public EstadosTarjetaImplService(EstadosTarjetaRepository repository) {
+    private final EnvioRepository repository;
+    public EnvioImplService(EnvioRepository repository) {
         this.repository = repository;
     }
 
     // Creación de un objeto registrador que se utilizará para registrar mensajes.
-    private static Logger logger = LoggerFactory.getLogger(EstadosTarjetaImplService.class);
+    private static Logger logger = LoggerFactory.getLogger(EnvioImplService.class);
 
 
     /**
@@ -49,7 +49,7 @@ public class EstadosTarjetaImplService extends ServiceBaseGeneric<EstadoTarjeta,
      * @param result El resultado de la consulta.
      */
     @Override
-    public void postConstruct(EstadoTarjeta result) { }
+    public void postConstruct(Envio result) { }
 
 
     /**
@@ -58,7 +58,7 @@ public class EstadosTarjetaImplService extends ServiceBaseGeneric<EstadoTarjeta,
      * @param entity La entidad que se va a conservar.
      */
     @Override
-    public void preConstruct(EstadoTarjeta entity) { }
+    public void preConstruct(Envio entity) { }
 
     /**
      * Convierte una entidad en un DTO.
@@ -67,12 +67,13 @@ public class EstadosTarjetaImplService extends ServiceBaseGeneric<EstadoTarjeta,
      * @return Un objeto DTO
      */
     @Override
-    public EstadosTarjetaDto convertToDto(EstadoTarjeta entity) {
-        logger.info("convertToDto->Entity::EstadosTarjeta {}:", entity);
-        EstadosTarjetaDto dto = modelMapper.map(entity, EstadosTarjetaDto.class);
-        logger.info("convertToDto-DTO::EstadosTarjetaDto {}:", dto);
+    public EnvioDto convertToDto(Envio entity) {
+        logger.info("convertToDto->Entity::Envio {}:", entity);
+        EnvioDto dto = modelMapper.map(entity, EnvioDto.class);
+        logger.info("convertToDto-DTO::EnvioDto {}:", dto);
         return dto;
     }
+
 
     /**
      * Convierte un DTO en una Entidad.
@@ -81,44 +82,48 @@ public class EstadosTarjetaImplService extends ServiceBaseGeneric<EstadoTarjeta,
      * @return A EstadosTarjeta entity
      */
     @Override
-    public EstadoTarjeta convertToEntity(EstadosTarjetaDto dto) {
-        logger.info("convertToEntity->DTO::EstadosTarjetaDto {}:", dto);
-        EstadoTarjeta entity = modelMapper.map(dto, EstadoTarjeta.class);
-        logger.info("convertToEntity->Entity::EstadosTarjeta {}:", entity);
+    public Envio convertToEntity(EnvioDto dto) {
+        logger.info("convertToEntity->DTO::EnvioDto {}:", dto);
+        Envio entity = modelMapper.map(dto, Envio.class);
+        logger.info("convertToEntity->Entity::Envio {}:", entity);
         return entity;
     }
 
+
     @Override
-    public List<EstadoTarjeta> findAll() {
+    public List<Envio> findAll() {
         return repository.findAll();
     }
 
+
     @Override
-    public EstadoTarjeta findById(String id) throws Exception {
+    public Envio findById(String id) throws Exception {
         String msg;
-        Optional<EstadoTarjeta> optional = repository.findById(Long.parseLong(id));
+        Optional<Envio> optional = repository.findById(Long.parseLong(id));
         if (optional.isPresent()) {
             msg = "Registro encontrado {} ";
             logger.info(msg, optional.get());
             return optional.get();
         }
-        msg = "No se encontro ningun EstadoTarjeta!";
+        msg = "No se encontro ningun Envio!";
         logger.error(msg);
         throw new Exception(msg);
     }
 
     @Override
-    public EstadoTarjeta findByCodigo(String codigo) throws Exception {
+    public Envio findByNroDocumento(String nroDocumento) throws Exception {
         String msg;
-        Optional<EstadoTarjeta> optional = repository.findByCodigo(codigo);
+        Optional<Envio> optional = repository.findByNroDocumento(nroDocumento);
         if (optional.isPresent()) {
             msg = "Registro encontrado {} ";
             logger.info(msg, optional.get());
             return optional.get();
+        } else {
+            return null;
         }
-        msg = "No se encontro ningun EstadoTarjeta!";
-        logger.error(msg);
-        throw new Exception(msg);
+        //msg = "No se encontro ningun Envio!";
+        //logger.error(msg);
+        //throw new Exception(msg);
     }
 
 }

@@ -1,7 +1,8 @@
 package eclub.com.conticonnec.controller;
 
-import eclub.com.conticonnec.domain.EstadosTarjeta;
+import eclub.com.conticonnec.domain.EstadoTarjeta;
 import eclub.com.conticonnec.service.EstadosTarjetaService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -31,16 +32,12 @@ public class EstadosTarjetaController {
     // Creación de un objeto registrador que se utilizará para registrar mensajes.
     final static Logger logger = LoggerFactory.getLogger(EstadosTarjetaController.class);
 
-    /**
-     * Devuelve una lista de todos los objetos EstadosTarjeta en la base de datos.
-     *
-     * @return Una lista de objetos EstadosTarjeta
-     */
+    @Operation(description = "Un método que devuelve una lista de objetos EstadoTarjeta.")
     @GetMapping("/")
     public ResponseEntity findAll() {
         try {
             ResponseEntity response;
-            List<EstadosTarjeta> list = estadosTarjetaService.findAll();
+            List<EstadoTarjeta> list = estadosTarjetaService.findAll();
             return ResponseEntity.ok(list);
         } catch (Exception e) {
             logger.error("EstadosTarjetaController.findAll.Error: {}", e.getMessage());
@@ -55,11 +52,12 @@ public class EstadosTarjetaController {
      * @param id El id de los EstadosTarjeta a recuperar.
      * @return ResponseEntity
      */
+    @Operation(description = "Devuelve el objeto EstadosTarjeta con el id dado.")
     @GetMapping("/findById/{id}")
     public ResponseEntity findById(@PathVariable("id") String id) {
         try {
             ResponseEntity response;
-            EstadosTarjeta estadosTarjeta = estadosTarjetaService.findById(id);
+            EstadoTarjeta estadosTarjeta = estadosTarjetaService.findById(id);
             return ResponseEntity.ok(estadosTarjeta);
         } catch (Exception e) {
             logger.error("EstadosTarjetaController.findById.Error: {}", e.getMessage());
@@ -74,11 +72,12 @@ public class EstadosTarjetaController {
      * @param codigo String
      * @return ResponseEntity
      */
+    @Operation(description = "Devuelve el objeto EstadosTarjeta con el código dado.")
     @GetMapping("/findByCodigo/{codigo}")
     public ResponseEntity findByCodigo(@PathVariable("codigo") String codigo) {
         try {
             ResponseEntity response;
-            EstadosTarjeta estadosTarjeta = estadosTarjetaService.findByCodigo(codigo);
+            EstadoTarjeta estadosTarjeta = estadosTarjetaService.findByCodigo(codigo);
             return ResponseEntity.ok(estadosTarjeta);
         } catch (Exception e) {
             logger.error("EstadosTarjetaController.findByCodigo.Error: {}", e.getMessage());

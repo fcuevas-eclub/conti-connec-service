@@ -20,14 +20,14 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EstadosTarjeta extends BaseEntity {
+public class EstadoTarjeta extends BaseEntity {
 
-    @NotNull
-    @Column(name = "codigo", nullable = false)
+    @NotNull(message = "El campo codigo es obligatorio.")
+    @Column(nullable = false)
     private String codigo;
 
-    @NotNull
-    @Column(name = "descripcion", nullable = false, length = 255)
+    @NotNull(message = "El campo descripcion es obligatorio.")
+    @Column( nullable = false, length = 255)
     private String descripcion;
 
 }

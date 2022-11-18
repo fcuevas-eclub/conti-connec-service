@@ -23,4 +23,11 @@ public interface SolicitudManagerService {
 
     ResponseEntity registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception;
 
+    /**
+     * Registra el seguimiento de una lista de envíos.
+     *
+     * @return Entidad de respuesta<String>
+     */
+    ResponseEntity<String> registrarSeguimientoPorLotes() throws Exception;
+
 }

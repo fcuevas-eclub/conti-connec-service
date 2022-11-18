@@ -8,7 +8,6 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -24,31 +23,29 @@ import java.util.List;
 @NoArgsConstructor
 public class Seguimiento extends BaseEntity {
 
-    @NotNull
+    @NotNull(message = "El campo fecha_alta es obligatorio.")
     @Column(name = "fecha_alta", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaAlta;
 
-    @NotNull
+    @NotNull(message = "El campo usuario_alta es obligatorio.")
     @Column(name = "usuario_alta", nullable = false)
     private String usuarioAlta;
 
-    @NotNull
+    @NotNull(message = "El campo nro_solicitud es obligatorio.")
     @Column(name = "nro_solicitud", nullable = false)
     private String nroSolicitud;
 
-    @NotNull
+    @NotNull(message = "El campo nro_documento es obligatorio.")
     @Column(name = "nro_documento", nullable = false)
     private String nroDocumento;
 
-    @NotNull
+    @NotNull(message = "El campo nro_tarjeta es obligatorio.")
     @Column(name = "nro_tarjeta", nullable = false, length = 255)
     private String nroTarjeta;
 
-    @OneToMany(mappedBy = "seguimiento", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "seguimiento", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    //private Collection<SeguimientoAdjunto> adjuntos = new ArrayList<>();
-    //private Collection<SeguimientoAdjunto> adjunto = new ArrayList<>();
-    private List<SeguimientoAdjunto> adjunto = new ArrayList<>();
+    private List<SeguimientoAdjunto> adjuntos = new ArrayList<>();
 
 }

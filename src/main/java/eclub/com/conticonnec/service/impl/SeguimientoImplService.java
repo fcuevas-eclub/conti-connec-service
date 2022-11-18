@@ -83,11 +83,22 @@ public class SeguimientoImplService extends ServiceBaseGeneric<Seguimiento, Segu
         return entity;
     }
 
+    /**
+     * Devuelve una lista de todos los seguimientos en la base de datos.
+     *
+     * @return Una lista de todos los objetos de Seguimiento en la base de datos.
+     */
     @Override
     public List<Seguimiento> findAll() {
         return repository.findAll();
     }
 
+    /**
+     * Encuentra un seguimiento por su id.
+     *
+     * @param id El id del seguimiento que se va a encontrar.
+     * @return El objeto Seguimiento.
+     */
     @Override
     public Seguimiento findById(String id) throws Exception {
         String msg;
@@ -102,8 +113,13 @@ public class SeguimientoImplService extends ServiceBaseGeneric<Seguimiento, Segu
         throw new Exception(msg);
     }
 
-
-
+    /**
+     * Devuelve el objeto de seguimiento.
+     *
+     * @param nroDocumento El número del documento que el usuario está buscando.
+     * @param nroSolicitud El número de la solicitud.
+     * @return El objeto Seguimiento.
+     */
     @Override
     public Seguimiento findByNroDocumentoAndNroSolicitud(String nroDocumento, String nroSolicitud) throws Exception {
         String msg;
@@ -118,6 +134,12 @@ public class SeguimientoImplService extends ServiceBaseGeneric<Seguimiento, Segu
         throw new Exception(msg);
     }
 
+    /**
+     * Devuelve un objeto de seguimiento por su atributo nroCard.
+     *
+     * @param nroTarjeta El número de la tarjeta que se busca.
+     * @return El objeto Seguimiento
+     */
     @Override
     public Seguimiento findByNroTarjeta(String nroTarjeta) throws Exception {
         String msg;

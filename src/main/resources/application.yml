@@ -1,68 +1,93 @@
+#Server Properties
 server:
-  port: 8080
+  port: ${SERVER_PORT}
   address:
-    ip: localhost
-  debug: true
+    ip: ${SERVER_ADDRES_IP}
+  debug: ${SERVER_ADDRES_IP}
 
+#Logging level
 logging:
   level:
-    root: INFO
-    eclub.com.conticonnec.client: INFO
+    root: ${LOGGING_LEVEL_ROOT}
+    eclub.com.conticonnec.client: ${LOGGING_LEVEL_ECLUB_COM_CONTICONNEC_CLIENT}
 
+#Configuracion de ambiente de desarrollo
 configuracion:
-  ambiente: Ambiente de Desarrollo
+  ambiente: ${CONFIGURACION_AMBIENTE}
 
+#Spring Properties
 spring:
+  output:
+    ansi:
+      enabled: ALWAYS
   application:
-    name: conti-connec-service
-
+    name: ${SPRING_APPLICATION_NAME}
+    #Datasource Properties
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/eclub_abm_conti
-    username: postgres
-    password: sql$
+    driver-class-name: ${DATASOURCE_DRIVER_CLASS_NAME}
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-      #ddl-auto: create-drop
-    show-sql: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    #JPA Properties
+    jpa:
+      hibernate:
+        ddl-auto: ${JPA_HIBERNATE_DDL_AUTO}
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          format_sql: true
+      show-sql: ${JPA_SHOW_SQL}
+      database: ${JPA_DATABASE}
+      database-platform: ${JPA_DATABASE_PLATFORM}
 
+  #Feing Client Properties
   feing:
     httpclient:
-      disableSslValidation: true
-      enabled: false
+      disableSslValidation: ${FEING_HTTPCLIENT_DISABLESSLVALIDATION}
+      enabled: ${FEING_HTTPCLIENT_ENABLED}
     okhttp:
-      enabled: true
+      enabled: ${FEING_OKHTTP_ENABLED}
     client:
       config:
         default:
-          connectionTimeout: 10000
-          readTimeout: 10000
-          loggerLevel: BASIC
+          connectionTimeout: ${FEING_CLIENT_CONFIG_DEFAULT_CONNECTIONTIMEOUT}
+          readTimeout: ${FEING_CLIENT_CONFIG_DEFAULT_READTIMEOUT}
+          loggerLevel: ${FEING_CLIENT_CONFIG_DEFAULT_LOGGERLEVEL}
+
+# Directorio para almacenar imagenes o archivos.
+resources:
+  files:
+    pendientes: ${RESOURCES_FILES_PENDIENTES}
+    procesados: ${RESOURCES_FILES_PROCESADOS}
 
 # Banco Continental
 api:
   conti:
-    comm-protocol: https
-    connTimeout: 10000
-    readTimeout: 10000
-    #for linux
-    #SSLFilePath: file://home:/waled/WALED1.pfx
-    #for windows
-    SSLFilePath: file:///C:/CERTIFICADO_CONTI/WALED1.pfx
-    SSLPwd: x4TjmHVyA3hHoBTm
-    #subscription_key: 225f19b75b0c4e658577b33c0802eead
-    subscription_key: 32823d4b00a54b15946506ba5b60ffb4
-    client_id: waled
-    client_secret: 28940183-7214-44e1-91e4-a5cdd3015141
+    comm-protocol: ${API_CONTI_COMM_PROTOCOL}
+    connTimeout: ${API_CONTI_CONNTIMEOUT}
+    readTimeout: ${API_CONTI_READTIMEOUT}
+    SSLFilePath: ${API_CONTI_SSLFILEPATH}
+    SSLPwd: ${API_CONTI_SSLPWD}
+    subscription_key: ${API_CONTI_SUBSCRIPTION_KEY}
+    client_id: ${API_CONTI_CLIENT_ID}
+    client_secret: ${API_CONTI_CLIENT_SECRET}
     url:
-      base: https://api-sandbox.bancontinental.com.py
-      post_token: https://api-sandbox.bancontinental.com.py/autenticarServicio/v1/realms/externo
-      get_by_nro_solicitud: /api-clientes-waled/v1/solicitud
-      post_solicitud: /api-clientes-waled/v1/solicitud
-      get_by_state: /api-clientes-waled/v1/solicitud/allByEstado
-      #post_registrar_seguimiento: /tarjetas-seguimientos/v1/registrar
-      post_registrar_seguimiento: /api-tarjeta-seguimiento/v1/registrar
+      base: ${API_CONTI_URL_BASE}
+      post_token: ${API_CONTI_URL_POST_TOKEN}
+      get_by_nro_solicitud: ${API_CONTI_URL_GET_BY_NRO_SOLICITUD}
+      post_solicitud: ${API_CONTI_URL_POST_SOLICITUD}
+      get_by_state: ${API_CONTI_URL_GET_BY_STATE}
+      post_registrar_seguimiento: ${API_CONTI_URL_POST_REGISTRAR_SEGUIMIENTO}
+
+# MicroServicio - User
+microservicio:
+  user:
+    account:
+      url:
+        base: ${MS_USER_ACCOUNT_URL_BASE}
+
+# Cronometración de tareas programadas
+scheduled:
+  task:
+    registrarSeguimientoPorLotes: ${SCHEDULED_TASK_REGISTRARSEGUIMIENTOPORLOTES}

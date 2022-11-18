@@ -2,6 +2,7 @@ package eclub.com.conticonnec.controller;
 
 import eclub.com.conticonnec.domain.Seguimiento;
 import eclub.com.conticonnec.service.SeguimientoService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
 
 /**
  * Es un controlador REST que expone un conjunto de endpoints para la entidad de Seguimiento.
@@ -35,6 +35,7 @@ public class SeguimientoController {
      *
      * @return Una lista de objetos de seguimiento
      */
+    @Operation(description = "Devuelve una lista de todos los objetos de Seguimiento en la base de datos.")
     @GetMapping("/")
     public ResponseEntity findAll() {
         try {
@@ -54,6 +55,7 @@ public class SeguimientoController {
      * @param id El id del Seguimiento que se va a recuperar.
      * @return Seguimiento
      */
+    @Operation(description = "Devuelve un objeto de seguimiento por id.")
     @GetMapping("/findById/{id}")
     public ResponseEntity findById(@PathVariable("id") String id) {
         try {
@@ -73,6 +75,7 @@ public class SeguimientoController {
      * @param nroDocumento El número del documento a buscar.
      * @return Seguimiento
      */
+    @Operation(description = "Devuelve un objeto de seguimiento por su nroDocumento.")
     @GetMapping("/findByNroDocumentoAndNroSolicitud/{nroDocumento}/{nroSolicitud}")
     public ResponseEntity findByNroDocumentoAndNroSolicitud(@PathVariable("nroDocumento") String nroDocumento, @PathVariable("nroSolicitud") String nroSolicitud) {
         try {
@@ -92,6 +95,7 @@ public class SeguimientoController {
      * @param nroTarjeta El número de la tarjeta que desea buscar.
      * @return Seguimiento
      */
+    @Operation(description = "Devuelve un objeto de seguimiento por su nroTarjeta.")
     @GetMapping("/findByNroTarjeta/{nroTarjeta}")
     public ResponseEntity findByNroTarjeta(@PathVariable("nroTarjeta") String nroTarjeta) {
         try {

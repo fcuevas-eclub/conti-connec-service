@@ -1,10 +1,8 @@
 package eclub.com.conticonnec.service.impl;
 
-import eclub.com.conticonnec.dto.SeguimientoRequestDTO;
-import eclub.com.conticonnec.service.VendorCallHelper;
-import eclub.com.conticonnec.dto.SolicitudContiDTO;
-import eclub.com.conticonnec.dto.SolicitudResumenContiDTO;
+import eclub.com.conticonnec.dto.*;
 import eclub.com.conticonnec.service.ContiCallHelper;
+import eclub.com.conticonnec.service.VendorCallHelper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
@@ -57,6 +55,10 @@ public class ContiImplCallHelper implements ContiCallHelper {
 
     @Value("${api.conti.url.post_registrar_seguimiento}")
     private String urlRegistrarSeguimiento;
+
+
+    @Value("${microservicio.user.account.url.base}")
+    private String accountInfoURL;
 
 
     private String getToken() throws Exception {
@@ -158,7 +160,6 @@ public class ContiImplCallHelper implements ContiCallHelper {
     }
 
     @Override
-    //public ResponseEntity<?> registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception {
     public ResponseEntity registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception {
         String token = this.getToken();
 
@@ -172,6 +173,54 @@ public class ContiImplCallHelper implements ContiCallHelper {
             response = vendorCallHelper.callPostObject(contiRestTemplate,
                                                     urlContiBase + urlRegistrarSeguimiento,
                                                         String.class,
+                                                        dto,
+                                                        headerParams);
+            return response;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    /**
+     * Llama a la API del proveedor para obtener la información de la cuenta.
+     *
+     * @param nroDocumento El número de documento del usuario.
+     * @return AccountInfoResponseDTO
+     */
+    @Override
+    public AccountInfoResponseDTO getAccountData(String nroDocumento) throws Exception {
+        Map<String, String> headerParams = new HashMap<>();
+        headerParams.put("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+        headerParams.put("Authorization", "Basic YWRtaW46V1dhbGVkQDIwMjI=");
+
+        ResponseEntity<AccountInfoResponseDTO> response = vendorCallHelper.callGetObject(contiRestTemplate,
+                                                                                        accountInfoURL+"/account/"+nroDocumento,
+                                                                                            AccountInfoResponseDTO.class,
+                                                                                        null,
+                                                                                            headerParams);
+        return response.getBody();
+    }
+
+    /**
+     * Llama a una API REST.
+     *
+     * @param dto El objeto que se enviará a la API.
+     * @return ResponseEntity<SeguimientoPorLotesResponseDTO>
+     */
+    @Override
+    public ResponseEntity<SeguimientoPorLotesResponseDTO> registrarSeguimientoPorLote(SeguimientoPorLotesRequestDTO dto) throws Exception {
+        String token = this.getToken();
+
+        Map<String, String> headerParams = new HashMap<>();
+        headerParams.put("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+        headerParams.put("Subscription-Key", ContiSubcriptionKey);
+        headerParams.put("Authorization", "Bearer " + token);
+
+        try {
+            ResponseEntity<SeguimientoPorLotesResponseDTO> response;
+            response = vendorCallHelper.callPostObject(contiRestTemplate,
+                                                    urlContiBase + urlRegistrarSeguimiento,
+                                                        SeguimientoPorLotesResponseDTO.class,
                                                         dto,
                                                         headerParams);
             return response;

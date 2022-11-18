@@ -1,8 +1,6 @@
 package eclub.com.conticonnec.service;
 
-import eclub.com.conticonnec.dto.SeguimientoRequestDTO;
-import eclub.com.conticonnec.dto.SolicitudContiDTO;
-import eclub.com.conticonnec.dto.SolicitudResumenContiDTO;
+import eclub.com.conticonnec.dto.*;
 import org.springframework.http.ResponseEntity;
 
 public interface ContiCallHelper {
@@ -21,4 +19,20 @@ public interface ContiCallHelper {
 
     ResponseEntity registrarSeguimiento(SeguimientoRequestDTO dto) throws Exception;
 
+
+    /**
+     * Devuelve la información de la cuenta de un cliente.
+     *
+     * @param nroDocumento El número de documento del usuario.
+     * @return AccountInfoResponseDTO
+     */
+    AccountInfoResponseDTO getAccountData(String nroDocumento) throws Exception;
+
+    /**
+     * Registra el seguimiento de un lote de documentos.
+     *
+     * @param dto SeguimientoPorLotesRequestDTO
+     * @return ResponseEntity<SeguimientoPorLotesResponseDTO>
+     */
+    ResponseEntity<SeguimientoPorLotesResponseDTO> registrarSeguimientoPorLote(SeguimientoPorLotesRequestDTO dto) throws Exception;
 }

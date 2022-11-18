@@ -3,7 +3,6 @@ package eclub.com.conticonnec.domain;
 import com.eclub.lib.common.models.entities.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
-import org.apache.commons.lang3.builder.ToStringExclude;
 
 import javax.persistence.*;
 
@@ -20,10 +19,7 @@ public class SeguimientoAdjunto extends BaseEntity {
     @Column(name = "tipo_documento", nullable = false)
     private Integer tipoDocumento;
 
-    //@ToStringExclude
-    @Column(name = "archivo", nullable = false)
-    //private byte[] Archivo;
-    //private String Archivo;
+    @Column(nullable = false)
     private String archivo;
 
     @ManyToOne

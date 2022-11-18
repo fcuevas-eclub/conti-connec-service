@@ -16,5 +16,4 @@ public interface SeguimientoService extends IServiceBase<Seguimiento, Seguimient
 
     Seguimiento findByNroTarjeta(String nroTarjeta) throws Exception;
 
-    //Seguimiento createWithAdjunts(Seguimiento seguimiento, List<SeguimientoAdjunto> adjuntos);
 }
