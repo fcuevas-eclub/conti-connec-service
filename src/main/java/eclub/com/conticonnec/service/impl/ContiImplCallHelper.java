@@ -191,7 +191,7 @@ public class ContiImplCallHelper implements ContiCallHelper {
     public AccountInfoResponseDTO getAccountData(String nroDocumento) throws Exception {
         Map<String, String> headerParams = new HashMap<>();
         headerParams.put("Content-Type", MediaType.APPLICATION_JSON_VALUE);
-        headerParams.put("Authorization", "Basic YWRtaW46V1dhbGVkQDIwMjI=");
+//        headerParams.put("Authorization", "Basic YWRtaW46V1dhbGVkQDIwMjI=");
 
         ResponseEntity<AccountInfoResponseDTO> response = vendorCallHelper.callGetObject(contiRestTemplate,
                                                                                         accountInfoURL+"/account/"+nroDocumento,
@@ -214,6 +214,7 @@ public class ContiImplCallHelper implements ContiCallHelper {
         Map<String, String> headerParams = new HashMap<>();
         headerParams.put("Content-Type", MediaType.APPLICATION_JSON_VALUE);
         headerParams.put("Subscription-Key", ContiSubcriptionKey);
+        headerParams.put("Client-Secret", ContiClientSecret);
         headerParams.put("Authorization", "Bearer " + token);
 
         try {
