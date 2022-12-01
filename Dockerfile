@@ -32,5 +32,8 @@ RUN adduser --system spring --uid 1000 --ingroup spring
 USER spring:spring
 
 WORKDIR /home/spring
+RUN mkdir pendientes
+RUN mkdir procesados
+RUN mkdir certificados
 COPY --from=build --chown=spring:spring build/target/*.jar ./app.jar
 CMD ["java", "-jar", "app.jar"]
