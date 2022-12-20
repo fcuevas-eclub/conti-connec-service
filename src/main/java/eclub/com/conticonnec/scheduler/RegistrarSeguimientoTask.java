@@ -51,6 +51,8 @@ public class RegistrarSeguimientoTask {
      * procesa y los elimina. Si no hay, no hace nada.
      */
     private void taskRegistrarSeguimientoPorLotes() {
+        log.info("Inicia la tarea programada taskRegistrarSeguimientoPorLotes");
+
         try {
             ResponseEntity<String> response = solicitudManagerService.registrarSeguimientoPorLotes();
 
@@ -60,7 +62,7 @@ public class RegistrarSeguimientoTask {
                 log.info("LA CARPETA DE SEGUIMIENTOS PENDIENTES POR LOTE NO TIENE ARCHIVOS PARA PROCESAR.");
             }
         } catch(Exception e) {
-            log.error("registrarSeguimientoPorLotes() -> Ha ocurrido un error inesperado: " + e.getMessage());
+            log.error("registrarSeguimientoPorLotes() -> Ha ocurrido un error inesperado e: " + e);
         }
     }
 

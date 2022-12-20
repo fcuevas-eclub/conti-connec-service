@@ -17,37 +17,37 @@ public class SolicitudContiDTO {
 
     @NotBlank
     @NotEmpty
-    private String TipoDocumento;
+    private String tipoDocumento;
 
     @NotBlank
     @NotEmpty
-    private String Documento;
+    private String documento;
 
     @NotBlank
     @NotEmpty
-    private String Correo;
+    private String correo;
 
     @NotBlank
     @NotEmpty
-    private String Telefono;
+    private String telefono;
 
     @NotBlank
     @NotEmpty
     @Size(max = 40)
-    private String Direccion;
+    private String direccion;
 
-    private String EstadoCivil;
+    private String estadoCivil;
 
-    private String ActividadEco;
+    private String actividadEco;
 
-    private Integer EstadoSolicitud;
+    private Integer estadoSolicitud;
 
-    private String FechaCarga;
+    private String fechaCarga;
 
     private String usuarioAlta;
 
-    private SolicitudContiDatosAdicionalesDTO DatosAdicionales = new SolicitudContiDatosAdicionalesDTO();
+    private SolicitudContiDatosAdicionalesDTO datosAdicionales = new SolicitudContiDatosAdicionalesDTO();
 
-    private List<SolicitudContiAdjuntoDTO> Adjunto = new ArrayList<SolicitudContiAdjuntoDTO>();
+    private List<SolicitudContiAdjuntoDTO> adjunto = new ArrayList<SolicitudContiAdjuntoDTO>();
 
 }

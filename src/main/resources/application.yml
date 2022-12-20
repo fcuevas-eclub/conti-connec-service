@@ -61,7 +61,7 @@ resources:
     pendientes: ${RESOURCES_FILES_PENDIENTES}
     procesados: ${RESOURCES_FILES_PROCESADOS}
 
-# Banco Continental
+# API Banco Continental
 api:
   conti:
     comm-protocol: ${API_CONTI_COMM_PROTOCOL}
@@ -80,12 +80,13 @@ api:
       get_by_state: ${API_CONTI_URL_GET_BY_STATE}
       post_registrar_seguimiento: ${API_CONTI_URL_POST_REGISTRAR_SEGUIMIENTO}
 
-# MicroServicio - User
+# MicroServicio - QueryUser
 microservicio:
   user:
     account:
       url:
         base: ${MS_USER_ACCOUNT_URL_BASE}
+    authorization: ${MS_USER_AUTORIZATION}
 
 # Cronometración de tareas programadas
 scheduled:

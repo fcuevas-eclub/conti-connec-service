@@ -56,9 +56,11 @@ public class ContiImplCallHelper implements ContiCallHelper {
     @Value("${api.conti.url.post_registrar_seguimiento}")
     private String urlRegistrarSeguimiento;
 
-
     @Value("${microservicio.user.account.url.base}")
     private String accountInfoURL;
+
+    @Value("${microservicio.user.authorization}")
+    private String authorizationValue;
 
 
     private String getToken() throws Exception {
@@ -74,7 +76,7 @@ public class ContiImplCallHelper implements ContiCallHelper {
         ResponseEntity<Object> response = vendorCallHelper.callPostObject(contiRestTemplate,
                                                                             urlContiToken,
                                                                             Object.class,
-                                                                            null,
+                                                                        null,
                                                                             headerParams);
         if (response == null)
             throw new Exception("Error procesar la solicitud!");
@@ -133,10 +135,10 @@ public class ContiImplCallHelper implements ContiCallHelper {
         headerParams.put("Subscription-Key", ContiSubcriptionKey);
 
         ResponseEntity<SolicitudResumenContiDTO> response = vendorCallHelper.callGetObject(contiRestTemplate,
-                                                                                        urlContiBase + urlContiGetByNroSolicitud + "/" + nrosolicitud,
-                                                                                            SolicitudResumenContiDTO.class,
-                                                                                        null,
-                                                                                            headerParams);
+                urlContiBase + urlContiGetByNroSolicitud + "/" + nrosolicitud,
+                    SolicitudResumenContiDTO.class,
+                null,
+                    headerParams);
 
         return response.getBody();
     }
@@ -151,10 +153,10 @@ public class ContiImplCallHelper implements ContiCallHelper {
         headerParams.put("Subscription-Key", ContiSubcriptionKey);
 
         ResponseEntity response = vendorCallHelper.callGetObject(contiRestTemplate,
-                                                                urlContiBase + urlContiGetByState + "/" + estado,
-                                                                    Object.class,
-                                                                null,
-                                                                headerParams);
+                urlContiBase + urlContiGetByState + "/" + estado,
+                Object.class,
+                null,
+                headerParams);
 
         return response;
     }
@@ -171,10 +173,10 @@ public class ContiImplCallHelper implements ContiCallHelper {
         try {
             ResponseEntity response;
             response = vendorCallHelper.callPostObject(contiRestTemplate,
-                                                    urlContiBase + urlRegistrarSeguimiento,
-                                                        String.class,
-                                                        dto,
-                                                        headerParams);
+                    urlContiBase + urlRegistrarSeguimiento,
+                    String.class,
+                    dto,
+                    headerParams);
             return response;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -191,14 +193,19 @@ public class ContiImplCallHelper implements ContiCallHelper {
     public AccountInfoResponseDTO getAccountData(String nroDocumento) throws Exception {
         Map<String, String> headerParams = new HashMap<>();
         headerParams.put("Content-Type", MediaType.APPLICATION_JSON_VALUE);
-//        headerParams.put("Authorization", "Basic YWRtaW46V1dhbGVkQDIwMjI=");
+        headerParams.put("Authorization", authorizationValue);
 
-        ResponseEntity<AccountInfoResponseDTO> response = vendorCallHelper.callGetObject(contiRestTemplate,
-                                                                                        accountInfoURL+"/account/"+nroDocumento,
-                                                                                            AccountInfoResponseDTO.class,
-                                                                                        null,
-                                                                                            headerParams);
-        return response.getBody();
+        try {
+            ResponseEntity<AccountInfoResponseDTO> response = vendorCallHelper.callGetObject(contiRestTemplate,
+                    accountInfoURL + "/account/" + nroDocumento,
+                    AccountInfoResponseDTO.class,
+                    null,
+                    headerParams);
+            logger.debug("CallHelper MS-QUERYUSER respondio correctamente.");
+            return response.getBody();
+        } catch (Exception e) {
+            throw new Exception("Error al enviar Peticion al Micro-Servicio QueryUser[ObtenerCliente] " + e.getMessage());
+        }
     }
 
     /**
@@ -220,13 +227,15 @@ public class ContiImplCallHelper implements ContiCallHelper {
         try {
             ResponseEntity<SeguimientoPorLotesResponseDTO> response;
             response = vendorCallHelper.callPostObject(contiRestTemplate,
-                                                    urlContiBase + urlRegistrarSeguimiento,
-                                                        SeguimientoPorLotesResponseDTO.class,
-                                                        dto,
-                                                        headerParams);
+                    urlContiBase + urlRegistrarSeguimiento,
+                    SeguimientoPorLotesResponseDTO.class,
+                    dto,
+                    headerParams);
+            logger.debug("CallHelper API-Banco Continental respondio correctamente.");
             return response;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            logger.info("Error al enviar Peticion al API del Banco Continental " + e.getMessage());
+            throw new Exception("Error en el Service-ContiImplCallHelper al enviar Peticion al Banco Continental " + e.getMessage());
         }
     }
 
